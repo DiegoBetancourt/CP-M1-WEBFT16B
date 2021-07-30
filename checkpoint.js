@@ -111,19 +111,21 @@ function secuenciaHenry(obj, n) {
 
 LinkedList.prototype.size = function(){
   // Tu código aca:
-var count = 0;
-if (this.head === null) {
-  return 0;
-} else {
+  var count = 0;
   var current = this.head;
-  while (current.next) {
-    count += 1;
-    current = current.next;
+
+  if (this.head === null) {
+    return 0;
+  } 
+  
+  else {
+    //Vamos iterando
+    while (current.next) {
+      count = count + 1;
+      current = current.next;   //Avanza el cursor
   }
   return (count + 1);
-}
-
-  
+  }
 }
 
 
@@ -144,7 +146,31 @@ if (this.head === null) {
 
 LinkedList.prototype.switchPos = function(pos1, pos2){
   // Tu código aca:
+
+  //Se crean los cursores
+  let current = this.head;
+  let current2 = this.head;
   
+
+  if (pos1 > this.size() || pos2 > this.size() || pos1 < 0 || pos2 < 0) {
+   return false;
+  }
+  else if (this.head === null) {
+    return false;
+  }
+   else {
+    for (let i = 0; i < pos1; i++) {
+      current = current.next;
+    }
+    var aux1 = current.value;
+    for (let i = 0; i < pos2; i++) {
+      current2 = current2.next;
+    }
+    var aux2 = current2.value;
+    current.value = aux2;
+    current2.value = aux1;
+    return true;
+  }
 
 }
 
@@ -159,9 +185,21 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 // Nota: las listas enlazadas mergeadas intercalandose.
 // El nodo 1 de la lista 1, se conecta con el nodo 1 de la lista 2.
 // Continuando con el nodo 2 de la lista 2, conectandose con el nodo 2 de la lista 2.
+
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
- 
+  var list = new LinkedList();
+  var current = linkedListOne.head
+  var current2 = linkedListTwo.head
+
+  while (current != null && current2 != null) {
+    list.add(current.value)
+    list.add(current2.value)
+
+    current = current.next;
+    current2 = current2.next;
+  }
+  return list
 
 }
 
@@ -234,8 +272,24 @@ var cardGame = function(playerOneCards, playerTwoCards){
 
 BinarySearchTree.prototype.height = function(){
   // Tu código aca:
+  if (!this.value) {
+    return 0;
+  }
+   if (this.left === null && this.right === null) {
+    return 1;
+  }
+   if (this.left === null) {
+    return 1 + this.right.height();
+  }
+   if (this.right === null) {
+    return 1 + this.left.height();
+  }
 
-   
+  var left = this.left.height()
+  var right = this.right.height()
+
+  return 1 + Math.max(left, right)
+ 
    
 
 }
@@ -259,7 +313,24 @@ BinarySearchTree.prototype.height = function(){
 
 var binarySearch = function (array, target) {
   // Tu código aca:
-  
+  let primero = 0;
+  let ultimo = array.length - 1;
+  let posicion = -1;
+  let encontrado = false;
+  let medio;
+
+  while (encontrado === false && primero <= ultimo) {
+    medio = Math.floor((primero + ultimo) / 2);
+    if (array[medio] == target) {
+      encontrado = true;
+      posicion = medio;
+    } else if (array[medio] > target) {
+      ultimo = medio - 1;
+    } else {
+      primero = medio + 1;
+    }
+  }
+  return posicion;
 }
 
 // EJERCICIO 9
@@ -320,8 +391,17 @@ var specialSort = function(array, orderFunction) {
 
 function closureDetect(symptoms, min) {
   // Tu código aca:
-  
+  return function (person) {
+    var symp = 0;
 
+    for (var i = 0; i < symptoms.length; i++) {
+      if (symptoms.includes(person.symptoms[i])) {
+        symp++;
+      }
+    }
+    if (symp >= min) return true;
+    return false;
+  }
 }
 
 // -------------------
