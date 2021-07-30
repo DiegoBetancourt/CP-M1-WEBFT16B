@@ -40,6 +40,8 @@ const {
 var isAncestor = function(genealogyTree, ancestor, descendant){
   // Tu código aca:
 
+
+
 }
 
 
@@ -77,8 +79,19 @@ var isAncestor = function(genealogyTree, ancestor, descendant){
 
 function secuenciaHenry(obj, n) {
   // Tu código aca:
-
+  if (n < 0) {
+    return null;
+  }
+  if (n === 0) {
+    return obj.first;
+  }
+  if (n === 1) {
+    return Object.keys(obj).length;
+  }
+  return (secuenciaHenry(obj, n - 1) * secuenciaHenry(obj, n - 2) - secuenciaHenry(obj, n - 2));
+  
 }
+
 
 // ---------------------
 
@@ -98,7 +111,19 @@ function secuenciaHenry(obj, n) {
 
 LinkedList.prototype.size = function(){
   // Tu código aca:
+var count = 0;
+if (this.head === null) {
+  return 0;
+} else {
+  var current = this.head;
+  while (current.next) {
+    count += 1;
+    current = current.next;
+  }
+  return (count + 1);
+}
 
+  
 }
 
 
@@ -119,6 +144,7 @@ LinkedList.prototype.size = function(){
 
 LinkedList.prototype.switchPos = function(pos1, pos2){
   // Tu código aca:
+  
 
 }
 
@@ -135,6 +161,7 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 // Continuando con el nodo 2 de la lista 2, conectandose con el nodo 2 de la lista 2.
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
+ 
 
 }
 
@@ -208,6 +235,9 @@ var cardGame = function(playerOneCards, playerTwoCards){
 BinarySearchTree.prototype.height = function(){
   // Tu código aca:
 
+   
+   
+
 }
 
 
@@ -229,7 +259,7 @@ BinarySearchTree.prototype.height = function(){
 
 var binarySearch = function (array, target) {
   // Tu código aca:
-
+  
 }
 
 // EJERCICIO 9
@@ -290,6 +320,7 @@ var specialSort = function(array, orderFunction) {
 
 function closureDetect(symptoms, min) {
   // Tu código aca:
+  
 
 }
 
